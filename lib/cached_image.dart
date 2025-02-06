@@ -64,7 +64,7 @@ class CachedImage extends StatelessWidget {
           );
   }
 
-  static void init() {
-    CacheRepository().init();
+  static Future<void> init() async {
+    await CacheRepository().init();
   }
 }

@@ -18,6 +18,7 @@ class CacheRepository {
   Future<void> _preloadCache() async {
     final keys = await CacheService.loadCacheKeys();
     for (final key in keys) {
+      print('>>> preloadCache: $key');
       final file = await _cacheManager.getFileFromCache(key);
       if (file != null) {
         memoryCache[key] = await file.file.readAsBytes();
