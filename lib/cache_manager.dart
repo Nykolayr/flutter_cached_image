@@ -1,8 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as p;
 
-class CustomCacheManager extends CacheManager {
+class CustomCacheManager extends CacheManager with ImageCacheManager {
   static const key = 'customImageCache';
 
   static final CustomCacheManager _instance = CustomCacheManager._();
@@ -11,20 +11,12 @@ class CustomCacheManager extends CacheManager {
   CustomCacheManager._()
       : super(Config(
           key,
-          stalePeriod: const Duration(days: 30),
-          maxNrOfCacheObjects: 1000,
-          repo: JsonCacheInfoRepository(databaseName: key),
-          fileSystem: IOFileSystem(key),
-          fileService: HttpFileService(),
+          stalePeriod: const Duration(days: 365),
+          maxNrOfCacheObjects: 10000,
         ));
-
-  Future<String> getFilePath(String url) async {
-    final dir = await getTemporaryDirectory();
-    return p.join(dir.path, key, _getFileName(url));
-  }
-
-  String _getFileName(String url) {
-    final uri = Uri.parse(url);
-    return p.basename(uri.path);
+  Future<bool> isImageInMemory(String url) async {
+    final provider = CachedNetworkImageProvider(url);
+    final key = await provider.obtainKey(ImageConfiguration.empty);
+    return PaintingBinding.instance.imageCache.containsKey(key);
   }
 }

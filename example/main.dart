@@ -1,12 +1,11 @@
 library flutter_cached_image;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_cached_image/cache_service.dart';
-import 'package:flutter_cached_image/cached_image.dart';
+import 'package:flutter_cached_image/flutter_cached_image.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await CacheService.init();
+  await FlutterCachedImage.init();
   runApp(const MyApp());
 }
 

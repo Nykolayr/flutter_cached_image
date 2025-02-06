@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'cache_service.dart';
 import 'cache_manager.dart';
 import 'repository.dart';
 
@@ -28,41 +27,40 @@ class CachedImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<List<String>>(
-      valueListenable: CacheService.cacheKeysNotifier,
-      builder: (context, keys, _) {
-        return CacheRepository.memoryCache.containsKey(cacheKey)
-            ? Image.memory(
-                CacheRepository.memoryCache[cacheKey]!,
-                width: width,
-                height: height,
-                fit: fit,
-              )
-            : CachedNetworkImage(
-                imageUrl: imageUrl,
-                width: width,
-                height: height,
-                fit: fit,
-                cacheKey: cacheKey,
-                cacheManager: CustomCacheManager(),
-                imageBuilder: (context, imageProvider) {
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                    CacheService.saveCacheKey(cacheKey,
-                        maxItems: maxCacheItems);
-                  });
-                  return Image(image: imageProvider, fit: fit);
-                },
-                placeholder: placeholder != null
-                    ? (ctx, url) => placeholder!(ctx)
-                    : (ctx, url) => const Center(
-                          child:
-                              CircularProgressIndicator(color: Colors.orange),
-                        ),
-                errorWidget: errorWidget != null
-                    ? (ctx, url, err) => errorWidget!(ctx)
-                    : (ctx, url, err) => const Icon(Icons.error),
-              );
-      },
-    );
+    Future<void> saveImage() async {
+      final repository = CacheRepository();
+      final file = await CustomCacheManager().getSingleFile(imageUrl);
+      final bytes = await file.readAsBytes();
+      await repository.addImage(cacheKey, bytes);
+    }
+
+    final repository = CacheRepository();
+    return repository.memoryCache.containsKey(cacheKey)
+        ? Image.memory(
+            repository.memoryCache[cacheKey]!,
+            width: width,
+            height: height,
+            fit: fit,
+          )
+        : CachedNetworkImage(
+            imageUrl: imageUrl,
+            width: width,
+            height: height,
+            fit: fit,
+            cacheKey: cacheKey,
+            cacheManager: CustomCacheManager(),
+            imageBuilder: (context, imageProvider) {
+              saveImage();
+              return Image(image: imageProvider, fit: fit);
+            },
+            placeholder: placeholder != null
+                ? (ctx, url) => placeholder!(ctx)
+                : (ctx, url) => const Center(
+                      child: CircularProgressIndicator(color: Colors.orange),
+                    ),
+            errorWidget: errorWidget != null
+                ? (ctx, url, err) => errorWidget!(ctx)
+                : (ctx, url, err) => const Icon(Icons.error),
+          );
   }
 }

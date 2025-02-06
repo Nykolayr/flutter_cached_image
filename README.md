@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 # Flutter Cached Image
-
 [![Pub Version](https://img.shields.io/pub/v/flutter_cached_image)](https://pub.dev/packages/flutter_cached_image)
 ![License](https://img.shields.io/github/license/yourname/flutter_cached_image)
 
@@ -23,6 +21,18 @@ dependencies:
       ref: main
 ```
 
+## Инициализация
+```dart
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await CacheService.initialize(
+    maxMemoryItems: 500,         // Максимум объектов в памяти
+    cacheDuration: Duration(days: 30), // Срок хранения в днях
+  );
+  runApp(MyApp());
+}
+```
+
 ## Использование
 ```dart
 CachedImage(
@@ -30,7 +40,7 @@ CachedImage(
   cacheKey: 'unique_image_key',
   width: 200,
   height: 150,
-  maxCacheItems: 500, // Максимум изображений в памяти
+  maxCacheItems: 500,
 )
 ```
 
@@ -58,7 +68,3 @@ CacheRepository.memoryCache.remove('key');
 
 ## Лицензия
 MIT
-=======
-# flutter_cached_image
-Advanced image caching for Flutter
->>>>>>> 79d65e027a570fa1f6b27ed4f5f0d685118d86b3
