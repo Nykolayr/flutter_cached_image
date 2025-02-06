@@ -18,7 +18,7 @@ dependencies:
   flutter_cached_image: 
     git:
       url: https://github.com/Nykolayr/flutter_cached_image.git
-      ref: main
+      ref: f515daf6f20ccfcc7c284deef2dae0f2f6b64afe 
 ```
 
 ## Инициализация
