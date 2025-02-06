@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Flutter Cached Image
 
 [![Pub Version](https://img.shields.io/pub/v/flutter_cached_image)](https://pub.dev/packages/flutter_cached_image)
@@ -57,3 +58,7 @@ CacheRepository.memoryCache.remove('key');
 
 ## Лицензия
 MIT
+=======
+# flutter_cached_image
+Advanced image caching for Flutter
+>>>>>>> 79d65e027a570fa1f6b27ed4f5f0d685118d86b3
