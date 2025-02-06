@@ -64,7 +64,8 @@ class CachedImage extends StatelessWidget {
           );
   }
 
-  static Future<void> init() async {
-    await CacheRepository().init();
+  /// Инициализация кэша, параметр newColor необязателен
+  static Future<void> init({Color? newColor}) async {
+    await CacheRepository().init(newColor: newColor);
   }
 }

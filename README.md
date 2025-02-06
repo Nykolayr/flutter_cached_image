@@ -25,7 +25,8 @@ dependencies:
 ```dart
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
- await CachedImage.init();
+  // Используйте newColor для кастомного цвета или удалите параметр для белого по умолчанию
+  await CachedImage.init(newColor: Colors.orange); // newColor необязателен
   runApp(MyApp());
 }
 ```
@@ -51,17 +52,6 @@ CachedImage(
 | fit            | BoxFit            | Нет          | BoxFit.cover    |
 | maxCacheItems  | int               | Нет          | 500             |
 
-## Локализация кэша
-```dart
-// Очистка кэша
-await CacheService.clearCache();
-
-// Предзагрузка изображений
-await CacheRepository.preloadCache();
-
-// Ручное управление
-CacheRepository.memoryCache.remove('key');
-```
 
 ## Лицензия
 MIT
