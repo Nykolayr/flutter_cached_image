@@ -25,10 +25,7 @@ dependencies:
 ```dart
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await CacheService.initialize(
-    maxMemoryItems: 500,         // Максимум объектов в памяти
-    cacheDuration: Duration(days: 30), // Срок хранения в днях
-  );
+ await CachedImage.init();
   runApp(MyApp());
 }
 ```
