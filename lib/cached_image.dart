@@ -55,7 +55,8 @@ class CachedImage extends StatelessWidget {
                 placeholder: placeholder != null
                     ? (ctx, url) => placeholder!(ctx)
                     : (ctx, url) => const Center(
-                          child: CircularProgressIndicator(),
+                          child:
+                              CircularProgressIndicator(color: Colors.orange),
                         ),
                 errorWidget: errorWidget != null
                     ? (ctx, url, err) => errorWidget!(ctx)
