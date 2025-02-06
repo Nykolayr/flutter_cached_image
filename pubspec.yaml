@@ -1,0 +1,22 @@
+name: flutter_cached_image
+description: Advanced image caching solution with memory and disk storage
+version: 1.0.0
+homepage: https://your-host.com/flutter_cached_image
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cached_network_image: ^3.4.1
+  flutter_cache_manager: ^3.4.1
+  path_provider: ^2.1.1
+  uuid: ^4.5.1
+  shared_preferences: ^2.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
