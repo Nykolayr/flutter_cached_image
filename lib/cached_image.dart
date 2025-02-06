@@ -63,4 +63,8 @@ class CachedImage extends StatelessWidget {
                 : (ctx, url, err) => const Icon(Icons.error),
           );
   }
+
+  static void init() {
+    CacheRepository().init();
+  }
 }
