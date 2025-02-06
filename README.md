@@ -19,7 +19,7 @@
 dependencies:
   flutter_cached_image: 
     git:
-      url: https://your-git-host.com/flutter_cached_image.git
+      url: https://github.com/Nykolayr/flutter_cached_image.git
       ref: main
 ```
 
